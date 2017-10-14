@@ -6,7 +6,8 @@ import numpy as np
 from gen.math import random_parameters, generate_hours, gaussian_w
 from gen.file import write
 from gen.parameters import (
-    AUTHORS, AUTHOR_TYPES, TYPES, NUMBER_OF_BOOKS, FILENAME
+    AUTHORS, AUTHOR_TYPES, TYPES, NUMBER_OF_BOOKS, FILENAME,
+    NUMBER_OF_TYPES
 )
 
 
@@ -25,7 +26,7 @@ def main():
         if len(author_type) == 1:
             book_type = author_type[0]
         else:
-            random_type_i = np.random.randint(0, 1, 1)[0]
+            random_type_i = np.random.randint(0, len(author_type), 1)[0]
             book_type = author_type[random_type_i]
         # Get this authors gaussian params
         g_author = AUTHORS[author]
@@ -46,7 +47,7 @@ def main():
         for j in range(len(hours)-1):
             hour = hours[j]
             solution = hours[j+1] - hour
-            sols.append(solution)
+            # sols.append(solution)
             current_hour = hour % 24
             day = ((hour - current_hour) / 24)
             current_day_of_week = int(day % 7)
@@ -63,7 +64,8 @@ def main():
             ]
             data.append(line)
         rental_history.append([sols])
-
+        # mp.plot(hours)
+        # mp.show()
     print(len(data))
     np.save(rental_history_file, rental_history)
     write(FILENAME, data)

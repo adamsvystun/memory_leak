@@ -1,3 +1,4 @@
 theano
 matplotlib
 numpy
+pyramid==1.9.1
