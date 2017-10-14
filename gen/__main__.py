@@ -46,7 +46,7 @@ def main():
         for j in range(len(hours)-1):
             hour = hours[j]
             solution = hours[j+1] - hour
-            sols.append(solution)
+            # sols.append(solution)
             current_hour = hour % 24
             day = ((hour - current_hour) / 24)
             current_day_of_week = int(day % 7)
@@ -62,6 +62,8 @@ def main():
                 solution
             ]
             data.append(line)
+        # mp.plot(hours)
+        # mp.show()
     print(len(data))
     write(FILENAME, data)
 
