@@ -1,5 +1,5 @@
 FILENAME = "data/input.data"
-NUMBER_OF_BOOKS = 200
+NUMBER_OF_BOOKS = 1
 # Number of authors 5
 # author #1 20      80 10       Fiction
 # author #2 30      10 5        Math, Fiction
