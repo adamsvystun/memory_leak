@@ -9,6 +9,9 @@ __pycache__/
 test.txt
 test_fin.txt
 
+.DS_Store
+.json
+best_nn.txt
 *.data
 *.npy
 
