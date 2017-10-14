@@ -40,3 +40,8 @@ def number_of_demands_per_day(total_demands, mu1, sigma1, mu2, sigma2):
         g1 = gaussian_w(mu2, sigma2, 7, g[w])
         num_demands.append(g1[d])
     return num_demands
+
+def random_parameters(mu, sigma, randomness=1):
+    rand_mu = np.random.uniform(mu-10*randomness/mu, mu+10*randomness/mu)
+    rand_sigma = np.random.uniform(sigma-20*randomness/sigma, sigma+20*randomness/sigma)
+    return rand_mu, rand_sigma
