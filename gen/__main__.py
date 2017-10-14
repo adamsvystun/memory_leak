@@ -67,7 +67,7 @@ def main():
         # mp.plot(hours)
         # mp.show()
     print(len(data))
-    np.save(rental_history_file, rental_history)
+    np.save('rental_history_file.data', rental_history)
     write(FILENAME, data)
 
 
