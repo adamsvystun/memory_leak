@@ -6,7 +6,7 @@ from .math import gaussian, gaussian_f
 def main():
     number_of_points = 70
     # 8736
-    g = gaussian_f(np.linspace(0, 100, number_of_points), 50, 10)
+    g = gaussian_f(np.linspace(0, 8736, number_of_points), 2500, 100)
     # mp.plot()
     d = []
     d.append(0)
