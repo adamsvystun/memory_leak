@@ -10,8 +10,10 @@ from gen.parameters import (
 )
 
 
-def gen():
+def main():
     data = []
+    all_demands = 0
+    all_hours = 0
     for i in range(NUMBER_OF_BOOKS):
         # Get a random author
         author = np.random.randint(0, 5, 1)[0]
@@ -34,9 +36,11 @@ def gen():
         # Randomize the demand
         demands = np.random.randint(2000, 3000, 1)[0]
         # Generate the demand hours through the year
+        all_demands += demands
         hours = generate_hours(
             demands, type_mu, type_sig, author_mu, author_sig, 50, 10
         )
+        all_hours += len(hours)
         for j in range(len(hours)-1):
             hour = hours[j]
             solution = hours[j+1] - hour
@@ -55,19 +59,11 @@ def gen():
                 solution
             ]
             data.append(line)
+    # print(all_demands)
+    # print(all_hours)
+    # print(len(data))
     write(FILENAME, data)
 
-
-
-def main():
-    # number_of_points = 8736
-    # # 8736
-    # d = gaussian_w(50, 10, 7, 20)
-    # # d = gaussian_d(11, 5, 5, 24)
-    # print(np.sum(d))
-    # mp.plot(d)
-    # mp.show()
-    gen()
 
 if __name__ == "__main__":
     main()
