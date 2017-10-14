@@ -38,6 +38,5 @@ def number_of_demands_per_day(total_demands, mu1, sigma1, mu2, sigma2):
     g = [ int(x) for x in g ]
     for w in range(len(g)):
         g1 = gaussian_w(mu2, sigma2, 7, g[w])
-        for d in range(len(g1)):
-            num_demands.append(int(g1[d])
+        num_demands.append(g1[d])
     return num_demands
