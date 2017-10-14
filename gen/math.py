@@ -62,11 +62,7 @@ def generate_hours(total_demands, mu1, sigma1, mu2, sigma2, mu3, sigma3, mu4, si
     else:
         gy = gaussian_w(mu1, sigma1, 52, total_demands)
     gen_hours_per_day = []
-<<<<<<< HEAD
-    gy = noise(gy, 24)
-=======
     gy = noise(gy, 40)
->>>>>>> a321acad5c79d7d902c6336fbb1f80cca7a21004
     gy = [ int(x) for x in gy ]
     time_line = []
     for w in range(52):
