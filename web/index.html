@@ -5,19 +5,66 @@
     <title>Library app</title>
     <link rel="stylesheet" href="/index.css" />
     <script src="https://unpkg.com/vue"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.js"></script>
 </head>
 <body>
     <div id="mainwrap">
         <div class="quote">
-            <h4>An investment in knowledge pays the best interest</h4>
-            <div>B. Franklin</div>
+            <div class="quote__text">An investment in knowledge pays the best interest</div>
+            <div class="quote__author">B. Franklin</div>
         </div>
-        <div>
-            <input type="text" v-model="search" id="search"/>
+        <div v-if="selected !== null">
+            <div @click="goToSearch()" class="btn--back">
+                Back
+            </div>
+            <h2>{{ selected.name }}</h2>
+            <div v-if="selected_data === null">
+
+
+                <div class="bookshelf_wrapper">
+                  <ul class="books_list">
+                    <li class="book_item first"></li>
+                    <li class="book_item second"></li>
+                    <li class="book_item third"></li>
+                    <li class="book_item fourth"></li>
+                    <li class="book_item fifth"></li>
+                    <li class="book_item sixth"></li>
+                  </ul>
+                  <div class="shelf"></div>
+                </div>
+
+
+            </div>
+            <div :style="{ display: (selected_data === null) ? 'none' : 'flex'}" class="charts">
+                <div>
+                    Predicted rental time:
+                </div>
+                <br />
+                <div class="df">
+
+                    <canvas id="year-chart" width="400" height="400"></canvas>
+                    <canvas id="week-chart" width="400" height="400"></canvas>
+                </div>
+                <br />
+                <div>
+                    Data used to build the model:
+                </div>
+                <br />
+                <div class="df">
+
+                    <canvas id="year-chart-old" width="400" height="400"></canvas>
+                    <canvas id="week-chart-old" width="400" height="400"></canvas>
+                </div>
+            </div>
         </div>
-        <div>
-            <div v-for="line in results">
-                {{ line }}
+        <div v-else>
+            <div>
+                <input type="text" v-model="search" id="search"/>
+            </div>
+            <div class="search__result-wrap">
+                <div v-for="line in results" class="search__result" @click="select(line)">
+                    {{ line.name }}
+                </div>
             </div>
         </div>
     </div>

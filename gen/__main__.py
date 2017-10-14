@@ -1,7 +1,6 @@
-from datetime import timedelta, datetime
-
 from matplotlib import pyplot as mp
 import numpy as np
+import pickle
 
 from gen.math import random_parameters, generate_hours, gaussian_w
 from gen.file import write
@@ -10,8 +9,11 @@ from gen.parameters import (
     NUMBER_OF_TYPES
 )
 
+<<<<<<< HEAD
+=======
 import pickle
 import json
+>>>>>>> 06317ec826569e6a10df335da4e8d35626cd1af8
 
 def main():
     data = []
@@ -69,6 +71,8 @@ def main():
                 solution
             ]
             data.append(line)
+        # mp.plot(sols)
+        # mp.show()
         plot_weeks = [0] * 53
         plot_days = [0] * 7
         for hour in hours:
@@ -86,9 +90,10 @@ def main():
             day = ((hour - current_hour) / 24)
             current_day_of_week = int(day % 7)
             plot_days[current_day_of_week] += 1
+        # rental_history.append(
+        #     [author, i, book_type, plot_weeks, plot_days, hours, sols]
+        # )
         rental_history.append([int(author), int(i), int(book_type), hours, sols, plot_days, plot_weeks])
-        # mp.plot(hours)
-        # mp.show()
     print(len(data))
     with open("test.json", "w") as fp:   #Pickling
         fp.write(json.dumps(rental_history))

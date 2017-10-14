@@ -4,7 +4,6 @@ import theano
 import theano.tensor as T
 
 import matplotlib.pyplot as plt
-from mpl_toolkits.mplot3d import Axes3D
 import pickle
 import json
 
@@ -75,6 +74,7 @@ b_o.set_value(best_nn[1])
 w_h1.set_value(best_nn[2])
 b_h1.set_value(best_nn[3])
 
+<<<<<<< HEAD
 author = 0
 ide = 300
 type_b = 1
@@ -88,7 +88,26 @@ for h in range(8736):
     x = scale(x, best_nn[5], best_nn[4])
     x = normalize(x, best_nn[6], best_nn[7])
     rental_time[current_week] += result(x)
+=======
+author = 4
+ide = 0
+type_b = 3
+>>>>>>> ccb8b1a978b4c4865adff46438e38506bc60b0dd
 
+def query(id):
+    rental_time = np.zeros(52)
+    rental_time = np.zeros(7)
+    for h in range(8736):
+        current_hour = h % 24
+        day = ((h - current_hour) / 24)
+        current_day_of_week = int(day % 7)
+        current_week = int((day - current_day_of_week) / 7)
+        x = [author, ide, current_week, current_day_of_week, current_hour, type_b]
+        x = scale(x, best_nn[5], best_nn[4])
+        x = normalize(x, best_nn[6], best_nn[7])
+        r = result(x)
+        rental_time[current_week] += r
+        rental_time[current_day_of_week] += r
 
 #Plots
 plt.figure(1,figsize=(15,9))

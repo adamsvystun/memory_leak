@@ -1,18 +1,204 @@
-var app6 = new Vue({
+    // var ctx1 = document.getElementById("year-chart");
+    // console.log(ctx1);
+    // var yearChart = new Chart(ctx1, {
+    //     type: 'line',
+    //     data: [1, 2]
+    // });
+    // var ctx2 = document.getElementById("week-chart");
+    // console.log(ctx2);
+    // var weekChart = new Chart("year-chart", {
+    //     type: 'line',
+    //     data: [3, 4]
+    // });
+function addData(chart, label, data) {
+    // chart.data.labels.push(label);
+    // chart.data.datasets.forEach((dataset) => {
+    //     dataset.data.push(data);
+    // });
+    // chart.update();
+}
+
+function removeData(chart) {
+    // chart.data.labels.pop();
+    // chart.data.datasets.forEach((dataset) => {
+    //     dataset.data.pop();
+    // });
+    // chart.update();
+}
+
+
+var app = new Vue({
     el: '#mainwrap',
     data: {
-        search: 'Hello Vue!',
-        books: []
+        search: 'Sh',
+        books: [],
+        selected: null,
+        selected_data: null
     },
     computed: {
         results: function(){
             var books = this.books;
             var query = this.search;
             var data = [];
-            data = books.filter(function(book){
-                return book.toLowerCase().indexOf(query.toLowerCase()) > -1
-            });
+            for (var i = 0; i < books.length; i++) {
+                if(books[i].toLowerCase().indexOf(query.toLowerCase()) > -1){
+                    data.push({
+                        id: i,
+                        name: books[i]
+                    });
+                }
+            }
             return data;
+        }
+    },
+    methods: {
+        select: function(el){
+            this.selected_data = null;
+            this.selected = el;
+            this.load_data(el.id);
+        },
+        goToSearch: function(){
+            this.selected_data = null;
+            this.selected = null;
+        },
+        load_data: function(id){
+            var that = this;
+            setTimeout(function(){
+                get("/api/book?id="+id, function(data){
+                    that.selected_data = data;
+                    var N = 52;
+                    var arr = Array.apply(null, {length: N}).map(Number.call, Number);
+                    new Chart("year-chart", {
+                        type: 'line',
+                        data: {
+                            labels: arr,
+                            datasets:[{
+                                label: "Rental time per week",
+                                data: data["year"],
+                                backgroundColor: "RGBA(75, 192, 192, 0.2)",
+                                borderColor: "#4BC0C0",
+                            }]
+                        },
+                        options: {
+                            responsive: false,
+                            hover: {
+                                mode: 'label'
+                            },
+                            scales: {
+                                xAxes: [{
+                                     display: true,
+                                    ticks: {
+                                        labelString: 'Week'
+                                    }
+                                }],
+                                yAxes: [{
+                                     display: true,
+                                    ticks: {
+                                        beginAtZero:true,
+                                        labelString: 'Time'
+                                        // steps: 50,
+                                        // stepValue: 1,
+                                        // max: 50
+                                    }
+                                }]
+                            }
+                        }
+                    });
+                    new Chart("year-chart-old", {
+                        type: 'line',
+                        data: {
+                            labels: arr,
+                            datasets:[{
+                                label: "Demand during the year",
+                                data: data["year_old"],
+                                backgroundColor: "RGBA(75, 192, 192, 0.2)",
+                                borderColor: "#4BC0C0",
+                            }]
+                        },
+                        options: {
+                            responsive: false,
+                            scales: {
+                                xAxes: [{
+                                     display: true,
+                                    ticks: {
+                                        labelString: 'Week'
+                                    }
+                                }],
+                                yAxes: [{
+                                     display: true,
+                                    ticks: {
+                                        beginAtZero:true,
+                                        labelString: 'Time'
+                                        // steps: 50,
+                                        // stepValue: 1,
+                                        // max: 50
+                                    }
+                                }]
+                            }
+                        }
+                    });
+                    N = 7;
+                    arr = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+                    new Chart("week-chart", {
+                        type: 'line',
+                        data: {
+                            labels: arr,
+                            datasets:[{
+                                label: "Rental time per pey",
+                                data: data["week"],
+                                backgroundColor: "rgba(255, 99, 132, 0.2)",
+                                borderColor: "rgba(255,99,132,1)",
+                            }]
+                        },
+                        options: {
+                            responsive: false,
+                            scales: {
+                                xAxes: [{
+                                     display: true,
+                                    ticks: {
+                                        labelString: 'Day'
+                                    }
+                                }],
+                                yAxes: [{
+                                     display: true,
+                                    ticks: {
+                                        beginAtZero:true,
+                                        labelString: 'Time'
+                                    }
+                                }]
+                            }
+                        }
+                    });
+                    new Chart("week-chart-old", {
+                        type: 'line',
+                        data: {
+                            labels: arr,
+                            datasets:[{
+                                label: "Demand during the week",
+                                data: data["week_old"],
+                                backgroundColor: "rgba(255, 99, 132, 0.2)",
+                                borderColor: "rgba(255,99,132,1)",
+                            }]
+                        },
+                        options: {
+                            responsive: false,
+                            scales: {
+                                xAxes: [{
+                                    ticks: {
+                                        labelString: 'Day'
+                                    }
+                                }],
+                                yAxes: [{
+                                    ticks: {
+                                        beginAtZero:true,
+                                        labelString: 'Time'
+                                    }
+                                }]
+                            }
+                        }
+                    });
+                })
+            }, 1000);
         }
     },
     created: function(){

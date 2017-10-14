@@ -5,7 +5,14 @@ __pycache__/
 .idea/
 # C extensions
 *.so
+*.png
+test.txt
+test_fin.txt
 
+test.json
+.DS_Store
+.json
+best_nn.txt
 *.data
 *.npy
 
