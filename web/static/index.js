@@ -63,63 +63,109 @@ var app = new Vue({
         },
         load_data: function(id){
             var that = this;
-            get("/api/book?id="+id, function(data){
-                that.selected_data = data;
-                var N = 52;
-                var arr = Array.apply(null, {length: N}).map(Number.call, Number);
-                new Chart("year-chart", {
-                    type: 'line',
-                    data: {
-                        labels: arr,
-                        datasets:[{
-                            label: "Rental time",
-                            data: data["year"],
-                            backgroundColor: "RGBA(75, 192, 192, 0.2)",
-                            borderColor: "#4BC0C0",
-                        }]
-                    },
-                    options: {
-                        responsive: false,
-                        scales: {
-                            yAxes: [{
-                                ticks: {
-                                    beginAtZero:true,
-                                    steps: 50,
-                                    stepValue: 1,
-                                    max: 50
-                                }
+            setTimeout(function(){
+                get("/api/book?id="+id, function(data){
+                    that.selected_data = data;
+                    var N = 52;
+                    var arr = Array.apply(null, {length: N}).map(Number.call, Number);
+                    new Chart("year-chart", {
+                        type: 'line',
+                        data: {
+                            labels: arr,
+                            datasets:[{
+                                label: "Rental time",
+                                data: data["year"],
+                                backgroundColor: "RGBA(75, 192, 192, 0.2)",
+                                borderColor: "#4BC0C0",
                             }]
+                        },
+                        options: {
+                            responsive: false,
+                            scales: {
+                                yAxes: [{
+                                    ticks: {
+                                        beginAtZero:true,
+                                        // steps: 50,
+                                        // stepValue: 1,
+                                        // max: 50
+                                    }
+                                }]
+                            }
                         }
-                    }
-                });
-                N = 7;
-                arr = Array.apply(null, {length: N}).map(Number.call, Number)
-                new Chart("week-chart", {
-                    type: 'line',
-                    data: {
-                        labels: arr,
-                        datasets:[{
-                            label: "Rental time",
-                            data: data["week"],
-                            backgroundColor: "rgba(255, 99, 132, 0.2)",
-                            borderColor: "rgba(255,99,132,1)",
-                        }]
-                    },
-                    options: {
-                        responsive: false,
-                        scales: {
-                            yAxes: [{
-                                ticks: {
-                                    beginAtZero:true,
-                                    steps: 50,
-                                    stepValue: 1,
-                                    max: 50
-                                }
+                    });
+                    new Chart("year-chart-old", {
+                        type: 'line',
+                        data: {
+                            labels: arr,
+                            datasets:[{
+                                label: "Rental time",
+                                data: data["year_old"],
+                                backgroundColor: "RGBA(75, 192, 192, 0.2)",
+                                borderColor: "#4BC0C0",
                             }]
+                        },
+                        options: {
+                            responsive: false,
+                            scales: {
+                                yAxes: [{
+                                    ticks: {
+                                        beginAtZero:true,
+                                        // steps: 50,
+                                        // stepValue: 1,
+                                        // max: 50
+                                    }
+                                }]
+                            }
                         }
-                    }
-                });
-            });
+                    });
+                    N = 7;
+                    arr = Array.apply(null, {length: N}).map(Number.call, Number)
+                    new Chart("week-chart", {
+                        type: 'line',
+                        data: {
+                            labels: arr,
+                            datasets:[{
+                                label: "Rental time",
+                                data: data["week"],
+                                backgroundColor: "rgba(255, 99, 132, 0.2)",
+                                borderColor: "rgba(255,99,132,1)",
+                            }]
+                        },
+                        options: {
+                            responsive: false,
+                            scales: {
+                                yAxes: [{
+                                    ticks: {
+                                        beginAtZero:true,
+                                    }
+                                }]
+                            }
+                        }
+                    });
+                    new Chart("week-chart-old", {
+                        type: 'line',
+                        data: {
+                            labels: arr,
+                            datasets:[{
+                                label: "Rental time",
+                                data: data["week_old"],
+                                backgroundColor: "rgba(255, 99, 132, 0.2)",
+                                borderColor: "rgba(255,99,132,1)",
+                            }]
+                        },
+                        options: {
+                            responsive: false,
+                            scales: {
+                                yAxes: [{
+                                    ticks: {
+                                        beginAtZero:true,
+                                    }
+                                }]
+                            }
+                        }
+                    });
+                })
+            }, 1000);
         }
     },
     created: function(){

@@ -19,11 +19,27 @@
             </div>
             <h2>{{ selected.name }}</h2>
             <div v-if="selected_data === null">
-                Loading...
+
+
+                <div class="bookshelf_wrapper">
+                  <ul class="books_list">
+                    <li class="book_item first"></li>
+                    <li class="book_item second"></li>
+                    <li class="book_item third"></li>
+                    <li class="book_item fourth"></li>
+                    <li class="book_item fifth"></li>
+                    <li class="book_item sixth"></li>
+                  </ul>
+                  <div class="shelf"></div>
+                </div>
+
+
             </div>
             <div :style="{ display: (selected_data === null) ? 'none' : 'flex'}" class="charts">
                 <canvas id="year-chart" width="400" height="400"></canvas>
                 <canvas id="week-chart" width="400" height="400"></canvas>
+                <canvas id="year-chart-old" width="400" height="400"></canvas>
+                <canvas id="week-chart-old" width="400" height="400"></canvas>
             </div>
         </div>
         <div v-else>

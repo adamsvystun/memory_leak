@@ -6,6 +6,7 @@ from pyramid.config import Configurator
 from pyramid.response import Response
 from pyramid.response import FileResponse
 from web.db import BOOKS
+from web.nn_web import query
 
 def random_arr(n):
     arr = []
@@ -16,10 +17,7 @@ def random_arr(n):
 
 def book_api(request):
     pk = request.params.get('id', 0)
-    data = {
-        "year": random_arr(52),
-        "week": random_arr(7),
-    }
+    data = query(int(pk))
     return Response(json.dumps(data))
 
 def books_api(request):
