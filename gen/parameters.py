@@ -1,5 +1,5 @@
 FILENAME = "data/input.data"
-NUMBER_OF_BOOKS = 1
+NUMBER_OF_BOOKS = 100
 # Number of authors 5
 # author #1 20      80 10       Fiction
 # author #2 30      10 5        Math, Fiction
@@ -26,7 +26,7 @@ AUTHOR_TYPES = [
 # type #2 Fiction   40 20
 # type #3 Classics  50 10000
 TYPES = [
-    [80, 10],
-    [40, 20],
+    [80, 5],
+    [40, 10],
     [50, 10000]
 ]

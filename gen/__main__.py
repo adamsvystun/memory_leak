@@ -41,7 +41,6 @@ def main():
             demands, type_mu, type_sig, author_mu, author_sig, 50, 10
         )
         all_hours += len(hours)
-        print(hours)
         sols = []
         for j in range(len(hours)-1):
             hour = hours[j]
@@ -49,8 +48,8 @@ def main():
             sols.append(solution)
             current_hour = hour % 24
             day = ((hour - current_hour) / 24)
-            current_day_of_week = day % 7
-            current_week = (day - current_day_of_week) / 7
+            current_day_of_week = int(day % 7)
+            current_week = int((day - current_day_of_week) / 7)
             # solution = 1 if solution == 0 else solution
             line = [
                 author,
@@ -62,12 +61,7 @@ def main():
                 solution
             ]
             data.append(line)
-        print(sols)
-        mp.plot(hours)
-        mp.show()
-    # print(all_demands)
-    # print(all_hours)
-    # print(len(data))
+    print(len(data))
     write(FILENAME, data)
 
 

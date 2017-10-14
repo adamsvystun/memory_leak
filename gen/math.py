@@ -1,29 +1,13 @@
 import numpy as np
 from matplotlib import pyplot as mp
 
+def noise(arr, max):
+    for i in range(len(arr)):
+        arr[i] += np.random.randint(0, max, 1)[0]
+    return arr
+
 def normalize_day(dist):
-    dist2 = []
-    dist3 = []
-    for i in range(1,100):
-        dist2.append(0)
-        dist3.append(0)
-    for i in range(0,len(dist)):
-        dist2[dist[i]] += 1
-    for i in range(1,25):
-        min_i = i
-        while dist2[i] > 0:
-            dist2[i] -= 1
-            while dist3[min_i] == 1:
-                min_i += 1
-                if min_i == 25:
-                    min_i = 1
-            dist3[min_i] = 1
-    count = 0
-    for i in range(1,25):
-        if dist3[i] == 1:
-            dist[count] = i
-            count += 1
-    return dist
+    return sorted(list(set(dist)))
 
 def gaussian_f(x, mu, sig):
     return np.exp(-np.power(x - mu, 2.) / (2 * np.power(sig, 2.)))
@@ -63,17 +47,19 @@ def generate_hours(total_demands, mu1, sigma1, mu2, sigma2, mu3, sigma3):
     for w in range(52):
         gw = gaussian_w(mu2, sigma2, 7, gy[w])
         gw = [ int(x) for x in gw ]
+        gw = noise(gw, 2)
         for d in range(7):
             if gw[d] == 0:
                 continue
             gd = gaussian_d(mu3, sigma3, gw[d], 24)
             gd = [ int(x) for x in gd ]
+            gd = normalize_day(gd)
             for h in range(len(gd)):
                 time_line.append((w*7 + d)*24 + gd[h])
     return time_line
 
 
 def random_parameters(mu, sigma, randomness=1):
-    rand_mu = np.random.uniform(mu-10*randomness/mu, mu+10*randomness/mu)
-    rand_sigma = np.random.uniform(sigma-20*randomness/sigma, sigma+20*randomness/sigma)
+    rand_mu = np.random.uniform(mu-10*randomness*mu/100, mu+10*randomness*mu/100)
+    rand_sigma = np.random.uniform(sigma-20*sigma*randomness/100, sigma+20*sigma*randomness/100)
     return rand_mu, rand_sigma
