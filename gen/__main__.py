@@ -9,7 +9,7 @@ def main():
     d = gaussian_w(50, 10, 52, 200)
     # d = gaussian_d(11, 5, 5, 24)
     # print(d)
-    mp.plot(d, np.zeros_like(d), "x")
+    mp.plot(d)
     mp.show()
 
 if __name__ == "__main__":
