@@ -3,9 +3,11 @@ from datetime import timedelta, datetime
 from matplotlib import pyplot as mp
 import numpy as np
 
-from .math import random_parameters, number_of_demands_per_day, gaussian_d
+from .math import (
+    random_parameters, number_of_demands_per_day, gaussian_d, normalize_day
+)
 
-# Number of authors 3
+# Number of authors 5
 # author #1 20      80 10       Fiction
 # author #2 30      10 5        Math, Fiction
 # author #3 70      50 10000    Math, Fiction
@@ -49,29 +51,24 @@ def gen():
         type_mu, type_sig = random_parameters(g_type[0], g_type[1])
         author_mu, author_sig = random_parameters(g_author[0], g_author[1])
         demands = np.random.randint(2000, 3000, 1)[0]
-        array_for_weeks = number_of_demands_per_day(
+        hours = generate_hours(
             demands, type_mu, type_sig, author_mu, author_sig
         )
-        current_day_of_week = 1
-        current_week = 1
-        for array_for_days in array_for_weeks:
-            for per_day in array_for_days:
-                per_day = int(per_day)
-                if not per_day:
-                    continue
-                day_distribution = gaussian_d(11, 5, per_day, 24)
-                day_distribution = [int(x) for x in day_distribution]
-                for current_hour in day_distribution:
-                    print([
-                        author,
-                        i,
-                        current_week,
-                        current_day_of_week,
-                        current_hour,
-                        book_type
-                    ])
-                current_day_of_week += 1
-            current_week += 1
+        for i in range(len(hours)-1):
+            hour = hours[i]
+            solution = hours[i+1] - hour
+            current_hour = hour % 24
+            day = ((hour - current_hour) / 24)
+            current_day_of_week += day % 7
+            current_week += (day - current_day_of_week) / 7
+            print([
+                author,
+                i,
+                current_week,
+                current_day_of_week,
+                current_hour,
+                book_type
+            ])
 
 
 

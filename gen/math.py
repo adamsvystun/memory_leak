@@ -1,6 +1,9 @@
 import numpy as np
 from matplotlib import pyplot as mp
 
+def normalize_day(dist):
+    for 
+
 def gaussian_f(x, mu, sig):
     return np.exp(-np.power(x - mu, 2.) / (2 * np.power(sig, 2.)))
 
