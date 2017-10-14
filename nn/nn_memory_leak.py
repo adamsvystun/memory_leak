@@ -10,8 +10,8 @@ from mpl_toolkits.mplot3d import Axes3D
 np.random.seed(10)
 
 epochs = 1000
-batch_size = 64
-no_hidden1 = 2 #num of neurons in hidden layer 1
+batch_size = 32
+no_hidden1 = 60 #num of neurons in hidden layer 1
 learning_rate = 0.0001
 
 floatX = theano.config.floatX
@@ -158,8 +158,7 @@ plt.plot(range(epochs), test_accuracy)
 plt.xlabel('Epochs')
 plt.ylabel('Accuracy')
 plt.title('Test Accuracy')
-plt.savefig('p_1b_Training_Test_Errors_and_Accuracy_n2.png')
+plt.savefig('p_1b_Training_Test_Errors_and_Accuracy_n_batch_32.png')
 
-np.load('/gen/rental_history_file.data.npy')
 
 plt.show()
