@@ -7,7 +7,7 @@ __pycache__/
 *.so
 *.png
 test.txt
-test_fin.text
+test_fin.txt
 
 *.data
 *.npy
