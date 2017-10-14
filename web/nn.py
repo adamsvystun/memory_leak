@@ -11,7 +11,7 @@ import json
 np.random.seed(10)
 
 epochs = 1000
-no_hidden1 = 60 #num of neurons in hidden layer 1
+no_hidden1 = 50 #num of neurons in hidden layer 1
 
 with open("test.json", "r") as fp:
     book_rental_h = json.load(fp)
@@ -75,9 +75,9 @@ b_o.set_value(best_nn[1])
 w_h1.set_value(best_nn[2])
 b_h1.set_value(best_nn[3])
 
-author = 4
-ide = 0
-type_b = 3
+author = 0
+ide = 300
+type_b = 1
 rental_time = np.zeros(52)
 for h in range(8736):
     current_hour = h % 24
@@ -94,7 +94,7 @@ for h in range(8736):
 plt.figure(1,figsize=(15,9))
 
 plt.subplot(121)
-plt.plot(book_rental_h[ide][6])
+plt.plot(book_rental_h[0][6])
 plt.xlabel('time line')
 plt.ylabel('Demands from the data set')
 plt.title('History of the demands at time')
