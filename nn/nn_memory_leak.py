@@ -5,13 +5,13 @@ import theano.tensor as T
 
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
-
+import pickle
 
 np.random.seed(10)
 
 epochs = 1000
-batch_size = 32
-no_hidden1 = 60 #num of neurons in hidden layer 1
+batch_size = 64
+no_hidden1 = 40 #num of neurons in hidden layer 1
 learning_rate = 0.0001
 
 floatX = theano.config.floatX
@@ -158,7 +158,15 @@ plt.plot(range(epochs), test_accuracy)
 plt.xlabel('Epochs')
 plt.ylabel('Accuracy')
 plt.title('Test Accuracy')
-plt.savefig('p_1b_Training_Test_Errors_and_Accuracy_n_batch_32.png')
+plt.savefig('p_1b_Training_Test_Errors_and_Accuracy_n_batch_64_decay_10**4_neurons_40.png')
 
+with open("test.txt", "rb") as fp:   # Unpickling
+    b = pickle.load(fp)
+
+time_line_book = 
+X = np.matrix()
+
+for h in range(8736):
+    X
 
 plt.show()

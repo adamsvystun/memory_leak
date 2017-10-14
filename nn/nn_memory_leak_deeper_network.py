@@ -11,8 +11,8 @@ np.random.seed(10)
 
 epochs = 1000
 batch_size = 64
-no_hidden1 = 60 #num of neurons in hidden layer 1
-no_hidden2 = 20 #num of neurons in next hidden layers
+no_hidden1 = 20 #num of neurons in hidden layer 1
+no_hidden2 = 10 #num of neurons in next hidden layers
 learning_rate = 0.0001
 
 floatX = theano.config.floatX
@@ -219,7 +219,7 @@ for i in range(len(networks)):
     plt.plot(range(epochs), test_accuracy)
     plt.xlabel('Iterations')
     plt.ylabel('Accuracy')
-    plt.title('Test accuracy for 4-layer and 5-layer networks')
+    plt.title('cost for 4-layer and 5-layer networks')
     plt.subplot(122)
     plt.plot(range(epochs), test_accuracy)
     plt.axis([0, epochs, -10000, 20000])

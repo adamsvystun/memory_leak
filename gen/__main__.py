@@ -10,6 +10,7 @@ from gen.parameters import (
     NUMBER_OF_TYPES
 )
 
+import pickle
 
 def main():
     data = []
@@ -67,12 +68,12 @@ def main():
                 solution
             ]
             data.append(line)
-        # rental_history.append([sols])
-        #mp.plot(hours)
-        #mp.show()
+        rental_history.append([author, i, book_type, hours, sols])
+        # mp.plot(hours)
+        # mp.show()
     print(len(data))
-
-    np.save('rental_history_file.data', rental_history)
+    with open("test.txt", "wb") as fp:   #Pickling
+        pickle.dump(rental_history, fp)
 
     write(FILENAME, data)
 
