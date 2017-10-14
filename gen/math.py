@@ -10,9 +10,9 @@ def gaussian(mu, sigma, number_of_points):
     return g
 
 def gaussian_d(mu, sig, n, scale):
-    g = gaussian_f(np.linspace(0, scale, n), mu, sig)
-    mp.plot(g)
-    mp.show()
+    g = gaussian_f(np.linspace(0, 100, n), mu, sig)
+    # mp.plot(g)
+    # mp.show()
     d = []
     d.append(0)
     for i, point in enumerate(g):
@@ -22,3 +22,9 @@ def gaussian_d(mu, sig, n, scale):
     for point in d:
         point = point * rel_scale
     return d
+
+def gaussian_w(mu, sig, n, demands):
+    g = gaussian_f(np.linspace(0, 100, n), mu, sig)
+    s = np.sum(g)
+    scale = demands/s
+    return g*scale
