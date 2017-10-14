@@ -54,14 +54,25 @@ def gaussian_w(mu, sig, n, demands):
     scale = demands/s
     return g*scale
 
-def number_of_demands_per_day(total_demands, mu1, sigma1, mu2, sigma2):
-    num_demands = []
-    g = gaussian_w(mu1, sigma1, 52, total_demands)
-    g = [ int(x) for x in g ]
-    for w in range(len(g)):
-        g1 = gaussian_w(mu2, sigma2, 7, g[w])
-        num_demands.append(g1)
-    return num_demands
+def generate_hours(total_demands, mu1, sigma1, mu2, sigma2, mu3, sigma3):
+    gen_hours_per_day = []
+    gy = gaussian_w(mu1, sigma1, 52, total_demands)
+    gy = [ int(x) for x in gy ]
+    for w in range(len(gy)):
+        gw = gaussian_w(mu2, sigma2, 7, gy[w])
+        gw = [ int(x) for x in gw ]
+        for d in range(len(gw)):
+            gd = gaussian_d(mu3, sigma3, 24, gw[d])
+            gd = [ int(x) for x in gd ]
+            for h in range(len(gd)):
+                gen_hours_per_day.append(int(gd[h]))
+    time_line = np.zeros(len(gen_hours_per_day))
+    acc = 0
+    for elem in range(len(gen_hours_per_day)):
+        acc += gen_hours_per_day[elem]
+        time_line[elem] = acc
+    return time_line
+
 
 def random_parameters(mu, sigma, randomness=1):
     rand_mu = np.random.uniform(mu-10*randomness/mu, mu+10*randomness/mu)
