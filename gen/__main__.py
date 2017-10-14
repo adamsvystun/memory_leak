@@ -11,6 +11,7 @@ from gen.parameters import (
 )
 
 import pickle
+import json
 
 def main():
     data = []
@@ -40,7 +41,7 @@ def main():
             type2_mu, type2_sig = random_parameters(g_type[2], g_type[3])
         author_mu, author_sig = random_parameters(g_author[0], g_author[1])
         # Randomize the demand
-        demands = np.random.randint(500, 1500, 1)[0]
+        demands = np.random.randint(2000, 3000, 1)[0]
         # Generate the demand hours through the year
         all_demands += demands
         hours = generate_hours(
@@ -52,7 +53,7 @@ def main():
         for j in range(len(hours)-1):
             hour = hours[j]
             solution = hours[j+1] - hour
-            # sols.append(solution)
+            sols.append(solution)
             current_hour = hour % 24
             day = ((hour - current_hour) / 24)
             current_day_of_week = int(day % 7)
@@ -68,12 +69,29 @@ def main():
                 solution
             ]
             data.append(line)
-        rental_history.append([author, i, book_type, hours, sols])
+        plot_weeks = [0] * 53
+        plot_days = [0] * 7
+        for hour in hours:
+            solution = hours[j+1] - hour
+            sols.append(solution)
+            current_hour = hour % 24
+            day = ((hour - current_hour) / 24)
+            current_day_of_week = int(day % 7)
+            current_week = int((day - current_day_of_week) / 7)
+            plot_weeks[current_week] += 1
+        for hour in hours:
+            solution = hours[j+1] - hour
+            sols.append(solution)
+            current_hour = hour % 24
+            day = ((hour - current_hour) / 24)
+            current_day_of_week = int(day % 7)
+            plot_days[current_day_of_week] += 1
+        rental_history.append([int(author), int(i), int(book_type), hours, sols, plot_days, plot_weeks])
         # mp.plot(hours)
         # mp.show()
     print(len(data))
-    with open("test.txt", "wb") as fp:   #Pickling
-        pickle.dump(rental_history, fp)
+    with open("test.json", "w") as fp:   #Pickling
+        fp.write(json.dumps(rental_history))
 
     write(FILENAME, data)
 

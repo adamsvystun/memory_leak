@@ -9,10 +9,10 @@ import pickle
 
 np.random.seed(10)
 
-epochs = 1000
+epochs = 1500
 batch_size = 32
 no_hidden1 = 60 #num of neurons in hidden layer 1
-learning_rate = 0.00001
+learning_rate = 0.0001
 
 floatX = theano.config.floatX
 
@@ -138,7 +138,7 @@ w_o.set_value(best_w_o)
 b_o.set_value(best_b_o)
 w_h1.set_value(best_w_h1)
 b_h1.set_value(best_b_h1)
-best_nn = [best_w_o, best_b_o, best_w_h1, best_b_h1]
+best_nn = [best_w_o, best_b_o, best_w_h1, best_b_h1, trainX_max, trainX_min,trainX_mean, trainX_std]
 
 best_pred, best_cost, best_accuracy = test(testX, np.transpose(testY))
 
@@ -159,7 +159,7 @@ plt.plot(range(epochs), test_accuracy)
 plt.xlabel('Epochs')
 plt.ylabel('Accuracy')
 plt.title('Test Accuracy')
-plt.savefig('p_1b_Training_Test_Errors_and_Accuracy_n_batch_32_decay_10**5_neurons_60.png')
+plt.savefig('p_1b_Training_Test_Errors_and_Accuracy_n_batch_32_decay_10**4_neurons_60_fin.png')
 plt.show()
 
 with open("best_nn.txt", "wb") as fp:   #Pickling
