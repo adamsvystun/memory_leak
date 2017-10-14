@@ -1,5 +1,8 @@
 all:
 
+web: $(shell find web -type f)
+	python3 -m web
+
 gen: $(shell find gen -type f)
 	python3 -m gen
 
