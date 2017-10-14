@@ -1,0 +1,11 @@
+html {
+    margin: 0;
+    padding: 0;
+}
+body {
+    background: red;
+    padding: 2rem;
+}
+.mainwrap {
+    background: #fff;
+}

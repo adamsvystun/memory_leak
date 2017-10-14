@@ -34,13 +34,17 @@ def main():
         g_type = TYPES[book_type]
         # Randomize gaussian params
         type_mu, type_sig = random_parameters(g_type[0], g_type[1])
+        type2_mu, type2_sig = None, None
+        if len(g_type) == 4:
+            type2_mu, type2_sig = random_parameters(g_type[2], g_type[3])
         author_mu, author_sig = random_parameters(g_author[0], g_author[1])
         # Randomize the demand
-        demands = np.random.randint(2000, 3000, 1)[0]
+        demands = np.random.randint(500, 1500, 1)[0]
         # Generate the demand hours through the year
         all_demands += demands
         hours = generate_hours(
-            demands, type_mu, type_sig, author_mu, author_sig, 50, 10
+            demands, type_mu, type_sig, author_mu, author_sig, 50, 10,
+            type2_mu, type2_sig
         )
         all_hours += len(hours)
         sols = []
@@ -63,11 +67,13 @@ def main():
                 solution
             ]
             data.append(line)
-        rental_history.append([sols])
-        # mp.plot(hours)
+        # rental_history.append([sols])
+        # mp.plot(sols)
         # mp.show()
     print(len(data))
+
     np.save('rental_history_file.data', rental_history)
+
     write(FILENAME, data)
 
 

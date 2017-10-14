@@ -12,6 +12,13 @@ def normalize_day(dist):
 def gaussian_f(x, mu, sig):
     return np.exp(-np.power(x - mu, 2.) / (2 * np.power(sig, 2.)))
 
+def gaussian_2f(x, mu, sig, mu1, sig1):
+    return (
+        np.exp(-np.power(x - mu, 2.) / (2 * np.power(sig, 2.))) + (
+            np.exp(-np.power(x - mu1, 2.) / (2 * np.power(sig1, 2.)))
+        )
+    )
+
 def gaussian_i(x, mu, sig):
     return 1 - np.exp(-np.power(x - mu, 2.) / (2 * np.power(sig, 2.)))
 
@@ -39,10 +46,19 @@ def gaussian_w(mu, sig, n, demands):
     scale = demands/s
     return g*scale
 
-def generate_hours(total_demands, mu1, sigma1, mu2, sigma2, mu3, sigma3):
+def gaussian_2w(mu, sig, mu2, sig2, n, demands):
+    g = gaussian_2f(np.linspace(0, 100, n), mu, sig, mu2, sig2)
+    s = np.sum(g)
+    scale = demands/s
+    return g*scale
+
+def generate_hours(total_demands, mu1, sigma1, mu2, sigma2, mu3, sigma3, mu4, sigma4):
+    if mu4:
+        gy = gaussian_2w(mu1, sigma1, mu4, sigma4, 52, total_demands)
+    else:
+        gy = gaussian_w(mu1, sigma1, 52, total_demands)
     gen_hours_per_day = []
-    gy = gaussian_w(mu1, sigma1, 52, total_demands)
-    gy = noise(gy, 5)
+    gy = noise(gy, 25)
     gy = [ int(x) for x in gy ]
     time_line = []
     for w in range(52):
