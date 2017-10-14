@@ -31,8 +31,8 @@ def shuffle_data (samples, labels):
     return samples, labels
 
 #read and divide data into test and train sets
-cal_housing = np.loadtxt('../data/input.data', delimiter=',')
-X_data, Y_data = cal_housing[:,:8], cal_housing[:,-1]
+book_rental_history = np.loadtxt('data/input.data', delimiter=',')
+X_data, Y_data = book_rental_history[:,:8], book_rental_history[:,-1]
 Y_data = (np.asmatrix(Y_data)).transpose()
 
 X_data, Y_data = shuffle_data(X_data, Y_data)
@@ -159,5 +159,7 @@ plt.xlabel('Epochs')
 plt.ylabel('Accuracy')
 plt.title('Test Accuracy')
 plt.savefig('p_1b_Training_Test_Errors_and_Accuracy_n2.png')
+
+np.load('/gen/rental_history_file.data.npy')
 
 plt.show()

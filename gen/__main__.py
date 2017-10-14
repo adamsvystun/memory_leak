@@ -68,8 +68,8 @@ def main():
             ]
             data.append(line)
         # rental_history.append([sols])
-        # mp.plot(sols)
-        # mp.show()
+        mp.plot(hours)
+        mp.show()
     print(len(data))
 
     np.save('rental_history_file.data', rental_history)
