@@ -14,8 +14,6 @@ def gaussian(mu, sigma, number_of_points):
 
 def gaussian_d(mu, sig, n, scale):
     g = gaussian_i(np.linspace(0, 100, n), mu, sig)
-    # mp.plot(g)
-    # mp.show()
     d = []
     d.append(0)
     for i, point in enumerate(g):
@@ -38,7 +36,7 @@ def number_of_demands_per_day(total_demands, mu1, sigma1, mu2, sigma2):
     g = [ int(x) for x in g ]
     for w in range(len(g)):
         g1 = gaussian_w(mu2, sigma2, 7, g[w])
-        num_demands.append(g1[d])
+        num_demands.append(g1)
     return num_demands
 
 def random_parameters(mu, sigma, randomness=1):
