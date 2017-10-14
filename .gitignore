@@ -9,6 +9,7 @@ __pycache__/
 test.txt
 test_fin.txt
 
+test.json
 .DS_Store
 .json
 best_nn.txt
