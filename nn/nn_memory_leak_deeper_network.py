@@ -9,10 +9,10 @@ from mpl_toolkits.mplot3d import Axes3D
 
 np.random.seed(10)
 
-epochs = 1000
+epochs = 2000
 batch_size = 64
-no_hidden1 = 20 #num of neurons in hidden layer 1
-no_hidden2 = 10 #num of neurons in next hidden layers
+no_hidden1 = 50 #num of neurons in hidden layer 1
+no_hidden2 = 20 #num of neurons in next hidden layers
 learning_rate = 0.0001
 
 floatX = theano.config.floatX
@@ -33,7 +33,7 @@ def shuffle_data (samples, labels):
 
 #read and divide data into test and train sets
 book_rental_history = np.loadtxt('data/input.data', delimiter=',')
-X_data, Y_data = book_rental_history[:,:8], book_rental_history[:,-1]
+X_data, Y_data = book_rental_history[:,:6], book_rental_history[:,-1]
 Y_data = (np.asmatrix(Y_data)).transpose()
 
 X_data, Y_data = shuffle_data(X_data, Y_data)
@@ -222,7 +222,6 @@ for i in range(len(networks)):
     plt.title('cost for 4-layer and 5-layer networks')
     plt.subplot(122)
     plt.plot(range(epochs), test_accuracy)
-    plt.axis([0, epochs, -10000, 20000])
     plt.xlabel('Iterations')
     plt.ylabel('Accuracy')
     plt.title('Test accuracy for 4-layer and 5-layer networks rescaled')

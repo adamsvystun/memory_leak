@@ -10,9 +10,9 @@ import pickle
 np.random.seed(10)
 
 epochs = 1000
-batch_size = 64
-no_hidden1 = 40 #num of neurons in hidden layer 1
-learning_rate = 0.0001
+batch_size = 32
+no_hidden1 = 60 #num of neurons in hidden layer 1
+learning_rate = 0.00001
 
 floatX = theano.config.floatX
 
@@ -32,7 +32,7 @@ def shuffle_data (samples, labels):
 
 #read and divide data into test and train sets
 book_rental_history = np.loadtxt('data/input.data', delimiter=',')
-X_data, Y_data = book_rental_history[:,:8], book_rental_history[:,-1]
+X_data, Y_data = book_rental_history[:,:6], book_rental_history[:,-1]
 Y_data = (np.asmatrix(Y_data)).transpose()
 
 X_data, Y_data = shuffle_data(X_data, Y_data)
@@ -138,6 +138,7 @@ w_o.set_value(best_w_o)
 b_o.set_value(best_b_o)
 w_h1.set_value(best_w_h1)
 b_h1.set_value(best_b_h1)
+best_nn = [best_w_o, best_b_o, best_w_h1, best_b_h1]
 
 best_pred, best_cost, best_accuracy = test(testX, np.transpose(testY))
 
@@ -158,15 +159,8 @@ plt.plot(range(epochs), test_accuracy)
 plt.xlabel('Epochs')
 plt.ylabel('Accuracy')
 plt.title('Test Accuracy')
-plt.savefig('p_1b_Training_Test_Errors_and_Accuracy_n_batch_64_decay_10**4_neurons_40.png')
-
-with open("test.txt", "rb") as fp:   # Unpickling
-    b = pickle.load(fp)
-
-time_line_book = 
-X = np.matrix()
-
-for h in range(8736):
-    X
-
+plt.savefig('p_1b_Training_Test_Errors_and_Accuracy_n_batch_32_decay_10**5_neurons_60.png')
 plt.show()
+
+with open("best_nn.txt", "wb") as fp:   #Pickling
+    pickle.dump(best_nn, fp)
