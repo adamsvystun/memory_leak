@@ -1,7 +1,14 @@
 import numpy as np
 from matplotlib import pyplot as mp
 
-
+def noise(arr, max):
+    for i in range(len(arr)):
+        rand = np.random.randint(0, max+1, 1)[0] - int(max/2)
+        if abs(rand) > arr[i]:
+            arr[i] = 0
+        else:
+            arr[i] += rand
+    return arr
 
 def normalize_day(dist):
     return sorted(list(set(dist)))
@@ -55,13 +62,17 @@ def generate_hours(total_demands, mu1, sigma1, mu2, sigma2, mu3, sigma3, mu4, si
     else:
         gy = gaussian_w(mu1, sigma1, 52, total_demands)
     gen_hours_per_day = []
+<<<<<<< HEAD
     gy = noise(gy, 24)
+=======
+    gy = noise(gy, 40)
+>>>>>>> a321acad5c79d7d902c6336fbb1f80cca7a21004
     gy = [ int(x) for x in gy ]
     time_line = []
     for w in range(52):
         gw = gaussian_w(mu2, sigma2, 7, gy[w])
         gw = [ int(x) for x in gw ]
-        gw = noise(gw, 5)
+        gw = noise(gw, 10)
         for d in range(7):
             if gw[d] == 0:
                 continue
