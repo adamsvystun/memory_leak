@@ -14,6 +14,7 @@ def main():
     data = []
     all_demands = 0
     all_hours = 0
+    rental_history = []
     for i in range(NUMBER_OF_BOOKS):
         # Get a random author
         author = np.random.randint(0, 5, 1)[0]
@@ -61,8 +62,12 @@ def main():
                 solution
             ]
             data.append(line)
+        rental_history.append([sols])
+
     print(len(data))
+    np.save(rental_history_file, rental_history)
     write(FILENAME, data)
+
 
 
 if __name__ == "__main__":
