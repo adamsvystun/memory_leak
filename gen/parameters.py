@@ -7,10 +7,10 @@ NUMBER_OF_BOOKS = 1
 # author #4 70      50 1        Math
 # author #5 70      50 10000    Classics
 AUTHORS = [
-    [80, 10],
-    [10, 5],
+    [80, 20],
+    [10, 15],
     [50, 10000],
-    [50, 1],
+    [50, 10],
     [50, 10000]
 ]
 AUTHOR_TYPES = [

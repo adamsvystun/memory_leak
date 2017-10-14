@@ -14,17 +14,16 @@ def gaussian(mu, sigma, number_of_points):
 
 def gaussian_d(mu, sig, n, scale):
     g = gaussian_i(np.linspace(0, 100, n), mu, sig)
-    # mp.plot(g)
-    # mp.show()
     d = []
     d.append(0)
     for i, point in enumerate(g):
         d.append(d[i] + point)
     d = d[1:]
     rel_scale = scale/d[n-1]
+    l = []
     for point in d:
-        point = point * rel_scale
-    return d
+        l.append(point * rel_scale)
+    return l
 
 def gaussian_w(mu, sig, n, demands):
     g = gaussian_f(np.linspace(0, 100, n), mu, sig)
@@ -36,19 +35,17 @@ def generate_hours(total_demands, mu1, sigma1, mu2, sigma2, mu3, sigma3):
     gen_hours_per_day = []
     gy = gaussian_w(mu1, sigma1, 52, total_demands)
     gy = [ int(x) for x in gy ]
-    for w in range(len(gy)):
+    time_line = []
+    for w in range(52):
         gw = gaussian_w(mu2, sigma2, 7, gy[w])
         gw = [ int(x) for x in gw ]
-        for d in range(len(gw)):
-            gd = gaussian_d(mu3, sigma3, 24, gw[d])
+        for d in range(7):
+            if gw[d] == 0:
+                continue
+            gd = gaussian_d(mu3, sigma3, gw[d], 24)
             gd = [ int(x) for x in gd ]
             for h in range(len(gd)):
-                gen_hours_per_day.append(int(gd[h]))
-    time_line = np.zeros(len(gen_hours_per_day))
-    acc = 0
-    for elem in range(len(gen_hours_per_day)):
-        acc += gen_hours_per_day[elem]
-        time_line[elem] = acc
+                time_line.append((w*7 + d)*24 + gd[h])
     return time_line
 
 
