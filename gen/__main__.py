@@ -1,7 +1,6 @@
-from datetime import timedelta, datetime
-
 from matplotlib import pyplot as mp
 import numpy as np
+import pickle
 
 from gen.math import random_parameters, generate_hours, gaussian_w
 from gen.file import write
@@ -10,7 +9,6 @@ from gen.parameters import (
     NUMBER_OF_TYPES
 )
 
-import pickle
 
 def main():
     data = []
@@ -68,7 +66,9 @@ def main():
                 solution
             ]
             data.append(line)
-        plot_weeks = np.zeros(52)
+        mp.plot(sols)
+        mp.show()
+        plot_weeks = np.zeros(53)
         plot_days = np.zeros(7)
         for hour in hours:
             solution = hours[j+1] - hour
@@ -85,7 +85,9 @@ def main():
             day = ((hour - current_hour) / 24)
             current_day_of_week = int(day % 7)
             plot_days[current_day_of_week] += 1
-        rental_history.append([author, i, book_type, hours, sols])
+        rental_history.append(
+            [author, i, book_type, plot_weeks, plot_days, hours, sols]
+        )
     print(len(data))
     with open("test.txt", "wb") as fp:   #Pickling
         pickle.dump(rental_history, fp)
