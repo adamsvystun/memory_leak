@@ -2,6 +2,9 @@ import numpy as np
 from matplotlib import pyplot as mp
 
 def gaussian_f(x, mu, sig):
+    return np.exp(-np.power(x - mu, 2.) / (2 * np.power(sig, 2.)))
+
+def gaussian_i(x, mu, sig):
     return 1 - np.exp(-np.power(x - mu, 2.) / (2 * np.power(sig, 2.)))
 
 def gaussian(mu, sigma, number_of_points):
@@ -10,7 +13,7 @@ def gaussian(mu, sigma, number_of_points):
     return g
 
 def gaussian_d(mu, sig, n, scale):
-    g = gaussian_f(np.linspace(0, 100, n), mu, sig)
+    g = gaussian_i(np.linspace(0, 100, n), mu, sig)
     # mp.plot(g)
     # mp.show()
     d = []
