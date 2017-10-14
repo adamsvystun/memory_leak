@@ -20,6 +20,9 @@ body {
 .charts {
     margin: 0 auto;
     flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }
 .quote__author {
     font-size: 1rem;
@@ -58,6 +61,7 @@ body {
 }
 .df {
     display: flex;
+    flex-direction: row;
 }
 .search__result-wrap {
     margin-top: 1rem;

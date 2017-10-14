@@ -36,10 +36,25 @@
 
             </div>
             <div :style="{ display: (selected_data === null) ? 'none' : 'flex'}" class="charts">
-                <canvas id="year-chart" width="400" height="400"></canvas>
-                <canvas id="week-chart" width="400" height="400"></canvas>
-                <canvas id="year-chart-old" width="400" height="400"></canvas>
-                <canvas id="week-chart-old" width="400" height="400"></canvas>
+                <div>
+                    Predicted rental time:
+                </div>
+                <br />
+                <div class="df">
+
+                    <canvas id="year-chart" width="400" height="400"></canvas>
+                    <canvas id="week-chart" width="400" height="400"></canvas>
+                </div>
+                <br />
+                <div>
+                    Data used to build the model:
+                </div>
+                <br />
+                <div class="df">
+
+                    <canvas id="year-chart-old" width="400" height="400"></canvas>
+                    <canvas id="week-chart-old" width="400" height="400"></canvas>
+                </div>
             </div>
         </div>
         <div v-else>

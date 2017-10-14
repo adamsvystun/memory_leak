@@ -73,7 +73,7 @@ var app = new Vue({
                         data: {
                             labels: arr,
                             datasets:[{
-                                label: "Rental time",
+                                label: "Rental time per week",
                                 data: data["year"],
                                 backgroundColor: "RGBA(75, 192, 192, 0.2)",
                                 borderColor: "#4BC0C0",
@@ -81,10 +81,21 @@ var app = new Vue({
                         },
                         options: {
                             responsive: false,
+                            hover: {
+                                mode: 'label'
+                            },
                             scales: {
+                                xAxes: [{
+                                     display: true,
+                                    ticks: {
+                                        labelString: 'Week'
+                                    }
+                                }],
                                 yAxes: [{
+                                     display: true,
                                     ticks: {
                                         beginAtZero:true,
+                                        labelString: 'Time'
                                         // steps: 50,
                                         // stepValue: 1,
                                         // max: 50
@@ -98,7 +109,7 @@ var app = new Vue({
                         data: {
                             labels: arr,
                             datasets:[{
-                                label: "Rental time",
+                                label: "Demand during the year",
                                 data: data["year_old"],
                                 backgroundColor: "RGBA(75, 192, 192, 0.2)",
                                 borderColor: "#4BC0C0",
@@ -107,9 +118,17 @@ var app = new Vue({
                         options: {
                             responsive: false,
                             scales: {
+                                xAxes: [{
+                                     display: true,
+                                    ticks: {
+                                        labelString: 'Week'
+                                    }
+                                }],
                                 yAxes: [{
+                                     display: true,
                                     ticks: {
                                         beginAtZero:true,
+                                        labelString: 'Time'
                                         // steps: 50,
                                         // stepValue: 1,
                                         // max: 50
@@ -119,13 +138,13 @@ var app = new Vue({
                         }
                     });
                     N = 7;
-                    arr = Array.apply(null, {length: N}).map(Number.call, Number)
+                    arr = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
                     new Chart("week-chart", {
                         type: 'line',
                         data: {
                             labels: arr,
                             datasets:[{
-                                label: "Rental time",
+                                label: "Rental time per pey",
                                 data: data["week"],
                                 backgroundColor: "rgba(255, 99, 132, 0.2)",
                                 borderColor: "rgba(255,99,132,1)",
@@ -134,9 +153,17 @@ var app = new Vue({
                         options: {
                             responsive: false,
                             scales: {
+                                xAxes: [{
+                                     display: true,
+                                    ticks: {
+                                        labelString: 'Day'
+                                    }
+                                }],
                                 yAxes: [{
+                                     display: true,
                                     ticks: {
                                         beginAtZero:true,
+                                        labelString: 'Time'
                                     }
                                 }]
                             }
@@ -147,7 +174,7 @@ var app = new Vue({
                         data: {
                             labels: arr,
                             datasets:[{
-                                label: "Rental time",
+                                label: "Demand during the week",
                                 data: data["week_old"],
                                 backgroundColor: "rgba(255, 99, 132, 0.2)",
                                 borderColor: "rgba(255,99,132,1)",
@@ -156,9 +183,15 @@ var app = new Vue({
                         options: {
                             responsive: false,
                             scales: {
+                                xAxes: [{
+                                    ticks: {
+                                        labelString: 'Day'
+                                    }
+                                }],
                                 yAxes: [{
                                     ticks: {
                                         beginAtZero:true,
+                                        labelString: 'Time'
                                     }
                                 }]
                             }
