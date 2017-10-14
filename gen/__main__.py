@@ -10,6 +10,7 @@ from gen.parameters import (
     NUMBER_OF_TYPES
 )
 
+import pickle
 
 def main():
     data = []
@@ -67,7 +68,6 @@ def main():
                 solution
             ]
             data.append(line)
-        # rental_history.append([sols])
         plot_weeks = np.zeros(52)
         plot_days = np.zeros(7)
         for hour in hours:
@@ -85,10 +85,10 @@ def main():
             day = ((hour - current_hour) / 24)
             current_day_of_week = int(day % 7)
             plot_days[current_day_of_week] += 1
-        # mp.plot(dem)
-        # mp.show()
+        rental_history.append([author, i, book_type, hours, sols])
     print(len(data))
-    # np.save('rental_history_file.data', rental_history)
+    with open("test.txt", "wb") as fp:   #Pickling
+        pickle.dump(rental_history, fp)
     write(FILENAME, data)
 
 

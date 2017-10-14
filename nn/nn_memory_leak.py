@@ -5,13 +5,13 @@ import theano.tensor as T
 
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
-
+import pickle
 
 np.random.seed(10)
 
 epochs = 1000
 batch_size = 64
-no_hidden1 = 2 #num of neurons in hidden layer 1
+no_hidden1 = 40 #num of neurons in hidden layer 1
 learning_rate = 0.0001
 
 floatX = theano.config.floatX
@@ -31,8 +31,8 @@ def shuffle_data (samples, labels):
     return samples, labels
 
 #read and divide data into test and train sets
-cal_housing = np.loadtxt('../data/input.data', delimiter=',')
-X_data, Y_data = cal_housing[:,:8], cal_housing[:,-1]
+book_rental_history = np.loadtxt('data/input.data', delimiter=',')
+X_data, Y_data = book_rental_history[:,:8], book_rental_history[:,-1]
 Y_data = (np.asmatrix(Y_data)).transpose()
 
 X_data, Y_data = shuffle_data(X_data, Y_data)
@@ -158,6 +158,15 @@ plt.plot(range(epochs), test_accuracy)
 plt.xlabel('Epochs')
 plt.ylabel('Accuracy')
 plt.title('Test Accuracy')
-plt.savefig('p_1b_Training_Test_Errors_and_Accuracy_n2.png')
+plt.savefig('p_1b_Training_Test_Errors_and_Accuracy_n_batch_64_decay_10**4_neurons_40.png')
+
+with open("test.txt", "rb") as fp:   # Unpickling
+    b = pickle.load(fp)
+
+time_line_book = 
+X = np.matrix()
+
+for h in range(8736):
+    X
 
 plt.show()
