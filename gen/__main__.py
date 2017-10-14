@@ -51,7 +51,7 @@ def main():
         for j in range(len(hours)-1):
             hour = hours[j]
             solution = hours[j+1] - hour
-            # sols.append(solution)
+            sols.append(solution)
             current_hour = hour % 24
             day = ((hour - current_hour) / 24)
             current_day_of_week = int(day % 7)
@@ -68,14 +68,28 @@ def main():
             ]
             data.append(line)
         # rental_history.append([sols])
-        # mp.plot(hours)
+        plot_weeks = np.zeros(52)
+        plot_days = np.zeros(7)
+        for hour in hours:
+            solution = hours[j+1] - hour
+            sols.append(solution)
+            current_hour = hour % 24
+            day = ((hour - current_hour) / 24)
+            current_day_of_week = int(day % 7)
+            current_week = int((day - current_day_of_week) / 7)
+            plot_weeks[current_week] += 1
+        for hour in hours:
+            solution = hours[j+1] - hour
+            sols.append(solution)
+            current_hour = hour % 24
+            day = ((hour - current_hour) / 24)
+            current_day_of_week = int(day % 7)
+            plot_days[current_day_of_week] += 1
+        # mp.plot(dem)
         # mp.show()
     print(len(data))
-
-    np.save('rental_history_file.data', rental_history)
-
+    # np.save('rental_history_file.data', rental_history)
     write(FILENAME, data)
-
 
 
 if __name__ == "__main__":
