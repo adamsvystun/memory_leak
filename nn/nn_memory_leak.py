@@ -10,18 +10,13 @@ import json
 
 np.random.seed(10)
 
-epochs = 1000
-<<<<<<< HEAD
+epochs = 2000
 batch_size = 64
 no_hidden1 = 50 #num of neurons in hidden layer 1
-=======
-batch_size = 32
-no_hidden1 = 60 #num of neurons in hidden layer 1
->>>>>>> ccb8b1a978b4c4865adff46438e38506bc60b0dd
 learning_rate = 0.0001
 print(batch_size)
 print(no_hidden1)
-print(lear)
+print(learning_rate)
 
 floatX = theano.config.floatX
 
@@ -119,7 +114,7 @@ best_b_o = 0
 best_b_h1 = np.zeros(no_hidden1)
 
 alpha.set_value(learning_rate)
-print(alpha.get_value())
+
 n = len(trainX)
 print(n)
 t = time.time()
