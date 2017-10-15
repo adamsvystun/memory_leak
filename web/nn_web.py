@@ -77,3 +77,4 @@ def query(pk):
         "week_old": book_rental_h[pk][5],
         "year_old": book_rental_h[pk][6],
     }
+    
