@@ -10,7 +10,7 @@ import json
 np.random.seed(10)
 
 epochs = 1000
-no_hidden1 = 60 #num of neurons in hidden layer 1
+no_hidden1 = 50 #num of neurons in hidden layer 1
 
 with open("test.json", "r") as fp:
     book_rental_h = json.load(fp)
@@ -74,9 +74,25 @@ b_o.set_value(best_nn[1])
 w_h1.set_value(best_nn[2])
 b_h1.set_value(best_nn[3])
 
+<<<<<<< HEAD
+author = 0
+ide = 300
+type_b = 1
+rental_time = np.zeros(52)
+for h in range(8736):
+    current_hour = h % 24
+    day = ((h - current_hour) / 24)
+    current_day_of_week = int(day % 7)
+    current_week = int((day - current_day_of_week) / 7)
+    x = [author, ide, current_week, current_day_of_week, current_hour, type_b]
+    x = scale(x, best_nn[5], best_nn[4])
+    x = normalize(x, best_nn[6], best_nn[7])
+    rental_time[current_week] += result(x)
+=======
 author = 4
 ide = 0
 type_b = 3
+>>>>>>> ccb8b1a978b4c4865adff46438e38506bc60b0dd
 
 def query(id):
     rental_time = np.zeros(52)
@@ -97,7 +113,7 @@ def query(id):
 plt.figure(1,figsize=(15,9))
 
 plt.subplot(121)
-plt.plot(book_rental_h[ide][6])
+plt.plot(book_rental_h[0][6])
 plt.xlabel('time line')
 plt.ylabel('Demands from the data set')
 plt.title('History of the demands at time')
