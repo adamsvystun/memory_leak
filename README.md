@@ -1,2 +1,2 @@
 # memory_leak
-Hackaton NTU
+Hackathon NTU
